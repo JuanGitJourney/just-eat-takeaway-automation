@@ -63,7 +63,7 @@ Get Filtered Jobs
 
 For Loop To Get Jobs From All Pages
     [Arguments]    ${numberOfPages}    ${finalJobsList}
-    FOR     ${page}     IN RANGE    1    ${numberOfPages}
+    FOR     ${page}     IN RANGE    1    ${numberOfPages} - 1
         Wait Until Element Is Visible       ${nextPageButton}
         Click Element       ${nextPageButton}
         ${currentPageJobsList}=    Get Jobs In Current Page

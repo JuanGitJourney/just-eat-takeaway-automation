@@ -11,6 +11,7 @@ Library    String
 ${CATEGORY}     Sales
 ${COUNTRY2}     Germany
 ${germany_subfilter_xpath}    xpath=//span[@class="result-text" and contains(text(), "${COUNTRY2}")]
+${germany_subfilter_element}    xpath=//li[contains(@class, 'tag')]//span[text()='Germany']
 
 
 *** Test Cases ***
@@ -28,16 +29,19 @@ Test Case 2 - Search Jobs by Category "Sales" - Verify Selection and Refine to G
     Verify Target Category Is Selected
     ${foundJobs}=   Execute Comprehensive Job Search
     Refine Search By Country    ${COUNTRY2}
-    ${foundJobs}=   Execute Comprehensive Job Search
-    Verify Jobs Category Is Sales Only    ${foundJobs}
+    ${foundJobs2}=   Execute Comprehensive Job Search
+    Verify Jobs Category Is Sales Only    ${foundJobs2}
 
 *** Keywords ***
 Refine Search By Country
     [Arguments]     ${COUNTRY2}
     Wait Until Element Is Visible       ${countryAccordion}
     Click Element    ${countryAccordion}
-    Wait Until Element Is Visible       ${netherlands_subfilter_xpath}
-    Click Element    ${netherlands_subfilter_xpath}
+    Wait Until Element Is Visible       ${germany_subfilter_xpath}
+    Click Element    ${germany_subfilter_xpath}
+    Wait Until Element Is Visible       ${germany_subfilter_element}
+    Delete All Cookies
+    Sleep       2s
 
 Verify Jobs Category Is Sales Only
     [Documentation]    Verifies that each job in the provided list belongs to the sales category.

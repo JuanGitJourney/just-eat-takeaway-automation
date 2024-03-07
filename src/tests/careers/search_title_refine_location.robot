@@ -26,8 +26,8 @@ Test Case 1 - Search Jobs by Title "Test" - Verify Multi-Location and Refine to 
     ${foundJobs}=   Execute Comprehensive Job Search
     Verify Jobs Are From Multiple Locations     ${foundJobs}
     Refine Search By Country    ${COUNTRY1}
-    ${foundJobs}=   Execute Comprehensive Job Search
-    Verify Jobs Location Is Netherlands Only    ${foundJobs}
+    ${foundJobs2}=   Execute Comprehensive Job Search
+    Verify Jobs Location Is Netherlands Only    ${foundJobs2}
 
 *** Keywords ***
 Input Job Title
@@ -55,6 +55,9 @@ Refine Search By Country
     Click Element    ${countryAccordion}
     Wait Until Element Is Visible       ${netherlands_subfilter_xpath}
     Click Element    ${netherlands_subfilter_xpath}
+    Wait Until Element Is Visible        xpath=//li[contains(@class, 'tag')]//span[text()='Netherlands']
+    Delete All Cookies
+    Sleep       2s
 
 Verify Jobs Location Is Netherlands Only
     [Documentation]    Verifies that each job in the provided list is located in the Netherlands.
