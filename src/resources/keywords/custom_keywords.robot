@@ -61,16 +61,6 @@ Get Filtered Jobs
     LOG     ${finalJobsList}
     RETURN  ${finalJobsList}
 
-For Loop To Get Jobs From All Pages
-    [Arguments]    ${numberOfPages}    ${finalJobsList}
-    FOR     ${page}     IN RANGE    1    ${numberOfPages} - 1
-        Wait Until Element Is Visible       ${nextPageButton}
-        Click Element       ${nextPageButton}
-        ${currentPageJobsList}=    Get Jobs In Current Page
-        Append To List      ${finalJobsList}    @{currentPageJobsList}
-    END
-    RETURN    ${finalJobsList}
-
 Get Jobs In Current Page
     ${jobs}=    Get Webelements    ${jobsListItem}
     ${jobsDetailsList}=    Create List
@@ -85,6 +75,15 @@ Get Jobs In Current Page
     END
     RETURN      ${jobsDetailsList}
 
+For Loop To Get Jobs From All Pages
+    [Arguments]    ${numberOfPages}    ${finalJobsList}
+    FOR     ${page}     IN RANGE    1    ${numberOfPages}
+        Wait Until Element Is Visible       ${nextPageButton}
+        Click Element       ${nextPageButton}
+        ${currentPageJobsList}=    Get Jobs In Current Page
+        Append To List      ${finalJobsList}    @{currentPageJobsList}
+    END
+    RETURN    ${finalJobsList}
 
 Verify Target Category Is Selected
     Wait Until Element Is Visible   css=ppc-content.ppc-text.ppc-content[data-ph-at-id='description-text']
