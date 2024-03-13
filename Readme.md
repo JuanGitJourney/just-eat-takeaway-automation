@@ -55,7 +55,7 @@ The test performs the following steps:
 
     Open a terminal in the project's tests source directory. 
     ```
-    cd /src/tests/careers/
+    cd src/tests/careers/
     ```
 
     Run the following command to execute the tests:
