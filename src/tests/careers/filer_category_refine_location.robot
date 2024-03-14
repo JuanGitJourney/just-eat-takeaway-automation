@@ -6,6 +6,7 @@ Resource    ../../resources/keywords/custom_keywords.robot
 Library    SeleniumLibrary
 Library    Collections
 Library    String
+Library    OperatingSystem
 
 *** Variables ***
 ${CATEGORY}     Sales
@@ -28,8 +29,12 @@ Test Case 2 - Search Jobs by Category "Sales" - Verify Selection and Refine to G
     Scroll Element Into View   css=ppc-content[data-ph-at-id='heading-text']
     Verify Target Category Is Selected
     ${foundJobs}=   Execute Comprehensive Job Search
+    Create File     /tmp/foundJobs.txt
+    Append to file    /tmp/foundJobs.txt    ${foundJobs}\n
     Refine Search By Country    ${COUNTRY2}
     ${foundJobs2}=   Execute Comprehensive Job Search
+    Create File     /tmp/foundJobs2.txt
+    Append to file    /tmp/foundJobs2.txt    ${foundJobs2}\n
     Verify Jobs Category Is Sales Only    ${foundJobs2}
 
 *** Keywords ***
@@ -41,7 +46,7 @@ Refine Search By Country
     Click Element    ${germany_subfilter_xpath}
     Wait Until Element Is Visible       ${germany_subfilter_element}
     Delete All Cookies
-    Sleep       2s
+
 
 Verify Jobs Category Is Sales Only
     [Documentation]    Verifies that each job in the provided list belongs to the sales category.

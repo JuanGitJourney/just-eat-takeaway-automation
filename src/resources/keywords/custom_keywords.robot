@@ -58,7 +58,6 @@ Get Filtered Jobs
     Append To List      ${finalJobsList}    @{currentPageJobsList}
     ${moreThanOnePage}=    Evaluate    ${numberOfPages} > 1
     Run Keyword If    ${moreThanOnePage}    Run Keyword    For Loop To Get Jobs From All Pages    ${numberOfPages}    ${finalJobsList}
-    LOG     ${finalJobsList}
     RETURN  ${finalJobsList}
 
 Get Jobs In Current Page

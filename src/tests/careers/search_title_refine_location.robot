@@ -6,6 +6,7 @@ Resource    ../../resources/keywords/custom_keywords.robot
 Library    SeleniumLibrary
 Library    Collections
 Library    String
+Library    OperatingSystem
 
 *** Variables ***
 ${JOBTITLE}     Test
